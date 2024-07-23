@@ -7,6 +7,7 @@ import Signin from './lib/Signin.jsx'
 import Profile from './user/Profile.jsx'
 import PrivateRoute from './lib/PrivateRoute.jsx'
 import EditProfile from './user/EditProfile.jsx'
+import Books from './book/Books.jsx'
 
 import Menu from './core/Menu' 
 function MainRouter() {
@@ -29,6 +30,7 @@ return (
  }
  />
  <Route path="/user/:userId" element={<Profile />} />
+ <Route path="/books" element={<Books />} />
 </Routes>
 </div>
  );
