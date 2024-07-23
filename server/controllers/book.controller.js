@@ -1,12 +1,12 @@
-import User from '../models/book.model.js'
+import Book from '../models/book.model.js'
 import extend from 'lodash/extend.js'
 import errorHandler from './error.controller.js'
 const create = async (req, res) => { 
-const user = new User(req.body) 
+const book = new book(req.body) 
 try {
-await user.save()
+await book.save()
 return res.status(200).json({ 
-message: "Successfully signed up!"
+message: "Successfully added new book"
 })
 } catch (err) {
 return res.status(400).json({
@@ -16,43 +16,38 @@ error: errorHandler.getErrorMessage(err)
 }
 const list = async (req, res) => { 
 try {
-let users = await User.find().select('name email updated created') 
-res.json(users)
+let books = await Book.find().select('book updated') 
+res.json(books)
 } catch (err) {
 return res.status(400).json({
 error: errorHandler.getErrorMessage(err) 
 })
 } 
 }
-const userByID = async (req, res, next, id) => { 
+const bookByID = async (req, res, next, id) => { 
 try {
-let user = await User.findById(id) 
-if (!user)
+let book = await Book.findById(id) 
+if (!book)
 return res.status('400').json({ 
-error: "User not found"
+error: "Book not found"
 })
-req.profile = user 
+req.profile = book 
 next()
 } catch (err) {
 return res.status('400').json({ 
-error: "Could not retrieve user"
+error: "Could not retrieve book"
 }) 
 }
 }
-const read = (req, res) => {
-req.profile.hashed_password = undefined 
-req.profile.salt = undefined
-return res.json(req.profile) 
-}
 const update = async (req, res) => { 
 try {
-let user = req.profile
-user = extend(user, req.body) 
-user.updated = Date.now() 
-await user.save()
-user.hashed_password = undefined 
-user.salt = undefined
-res.json(user) 
+let book = req.profile
+book = extend(book, req.body) 
+book.updated = Date.now() 
+await book.save()
+book.hashed_password = undefined 
+book.salt = undefined
+res.json(book) 
 } catch (err) {
 return res.status(400).json({
 error: errorHandler.getErrorMessage(err) 
@@ -61,15 +56,15 @@ error: errorHandler.getErrorMessage(err)
 }
 const remove = async (req, res) => { 
 try {
-let user = req.profile
-let deletedUser = await user.deleteOne() 
-deletedUser.hashed_password = undefined 
-deletedUser.salt = undefined
-res.json(deletedUser) 
+let book = req.profile
+let deletedBook = await book.deleteOne() 
+deletedBook.hashed_password = undefined 
+deletedBook.salt = undefined
+res.json(deletedBook) 
 } catch (err) {
 return res.status(400).json({
 error: errorHandler.getErrorMessage(err) 
 })
 } 
 }
-export default { create, userByID, read, list, remove, update }
+export default { create, bookByID, read, list, remove, update }
