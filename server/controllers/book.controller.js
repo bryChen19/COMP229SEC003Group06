@@ -24,6 +24,7 @@ error: errorHandler.getErrorMessage(err)
 })
 } 
 }
+
 const bookByID = async (req, res, next, id) => { 
 try {
 let book = await Book.findById(id) 
@@ -39,6 +40,9 @@ error: "Could not retrieve book"
 }) 
 }
 }
+const read = (req, res) => {
+    return res.json(req.profile) 
+    }
 const update = async (req, res) => { 
 try {
 let book = req.profile

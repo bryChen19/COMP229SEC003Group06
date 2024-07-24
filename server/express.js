@@ -6,8 +6,11 @@ import cors from 'cors'
 import helmet from 'helmet'
 import Template from './../template.js'
 import userRoutes from './routes/user.routes.js'
+import bookRoutes from './routes/book.routes.js'
 import authRoutes from './routes/auth.routes.js'
 import path from 'path'
+import userController from './controllers/user.controller.js'
+import bookController from './controllers/book.controller.js'
 const app = express()
 const CURRENT_WORKING_DIR = process.cwd()
  
@@ -19,6 +22,7 @@ app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/', userRoutes)
+app.use('/', bookRoutes)
 app.use('/', authRoutes)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-const UserSchema = new mongoose.Schema({
+const BookSchema = new mongoose.Schema({
 title: {
 type: String,
 trim: true,
