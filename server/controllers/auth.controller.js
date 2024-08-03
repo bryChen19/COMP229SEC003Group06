@@ -22,7 +22,8 @@ import config from './../../config/config.js'
         user: {
         _id: user._id, 
         name: user.name,
-        email: user.email 
+        email: user.email,
+        librarian: user.librarian,
         }
         })
         } catch (err) {

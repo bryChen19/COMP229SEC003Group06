@@ -2,15 +2,17 @@ import React, {useState, useEffect} from 'react'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Switch from '@material-ui/core/Switch'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import Icon from '@material-ui/core/Icon'
 import { makeStyles } from '@material-ui/core/styles'
-import auth from '../lib/auth-helper.js'
+import auth from '../lib/auth-helper'
 import {read, update} from './api-user.js'
 import {Navigate} from 'react-router-dom'
-import { useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
 const useStyles = makeStyles(theme => ({
 card: {
 maxWidth: 600,
@@ -34,6 +36,10 @@ width: 300
 submit: {
 margin: 'auto',
 marginBottom: theme.spacing(2)
+},
+subheading: {
+    marginTopp: theme.spacing(2),
+    color: theme.palette.openTitle,
 }
 }))
 export default function EditProfile() {
@@ -43,7 +49,7 @@ const [values, setValues] = useState({
 name: '',
 password: '',
 email: '',
-open: false,
+librarian: false,
 error: '',
 NavigateToProfile: false
 })
@@ -52,33 +58,36 @@ useEffect(() => {
 const abortController = new AbortController()
 const signal = abortController.signal
 read({
-userId: userId
+userId: jwt.user._id
 }, {t: jwt.token}, signal).then((data) => {
 if (data && data.error) {
 setValues({...values, error: data.error})
 } else {
-setValues({...values, name: data.name, email: data.email})
+setValues({...values, name: data.name, email: data.email, librarian: data.librarian,})
 }
 })
 return function cleanup(){
 abortController.abort()
 }
-}, [userId])
+}, [jwt.user._id])
 const clickSubmit = () => {
 const user = {
 name: values.name || undefined,
 email: values.email || undefined,
-password: values.password || undefined
+password: values.password || undefined,
+librarian: values.librarian || false
 }
 update({
-userId: userId
+userId: jwt.user._id
 }, {
 t: jwt.token
 }, user).then((data) => {
 if (data && data.error) {
 setValues({...values, error: data.error})
 } else {
-setValues({...values, userId: data._id, NavigateToProfile: true})
+    auth.updateUser(data, () => {
+        setValues({...values, userId: data._id, NavigateToProfile: true})
+    })
 }
 })
 }
@@ -97,6 +106,21 @@ Edit Profile
 <TextField id="name" label="Name" className={classes.textField} value={values.name} onChange={handleChange('name')} margin="normal"/><br/>
 <TextField id="email" type="email" label="Email" className={classes.textField} value={values.email} onChange={handleChange('email')} margin="normal"/><br/>
 <TextField id="password" type="password" label="Password" className={classes.textField} value={values.password} onChange={handleChange('password')} margin="normal"/>
+<Typography variant="subtitle1" className={classes.subheading}>
+    Seller Account
+</Typography>
+<FormControllabel control={
+    <Switch classes ={{
+        checked: classes.checked,
+        bar: classes.bar,
+        }}
+        checked={values.librarian}
+        onChange={handleCheck}
+        />
+        }
+        label = {values.librarian ? 'Active' :'Inactive'}
+    />
+
 <br/> {
 values.error && (<Typography component="p" color="error">
 <Icon color="error" className={classes.error}>error</Icon>
