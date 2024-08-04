@@ -71,5 +71,15 @@ return res.status(400).json({
 error: errorHandler.getErrorMessage(err) 
 })
 } 
+};
+
+const isSeller = (req, res, next) => {
+    const isSeller = peq.profile && peq.profile.seller;
+    if (!isSeller){
+        return pseudoRandomBytes.status("403").json({
+            error: "user is not a seller",
+        });
+    }
+    next();
 }
-export default { create, userByID, read, list, remove, update }
+export default { create, userByID, read, list, remove, update, isSeller }

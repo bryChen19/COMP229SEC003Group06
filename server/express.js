@@ -8,6 +8,7 @@ import Template from './../template.js'
 import userRoutes from './routes/user.routes.js'
 import bookRoutes from './routes/book.routes.js'
 import authRoutes from './routes/auth.routes.js'
+import shopRoutes from './routes/shop.routes.js'
 import path from 'path'
 import userController from './controllers/user.controller.js'
 import bookController from './controllers/book.controller.js'
@@ -25,6 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', userRoutes)
 app.use('/', bookRoutes)
 app.use('/', authRoutes)
+app.ust('/', shopRoutes)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
