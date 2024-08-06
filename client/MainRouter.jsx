@@ -30,6 +30,9 @@ return (
  }
  />
  <Route path="/user/:userId" element={<Profile />} />
+ <Route path="/librarian/shops" element ={ <PrivateRoute><MyShops/></PrivateRoute>}/>
+ <Route path="/librarian/shop/new" element ={ <PrivateRoute><NewShop/></PrivateRoute>}/>
+ <Route path="/librarian/shop/edit" element ={ <PrivateRoute><EditShop/></PrivateRoute>}/>
  <Route path="/books" element={<Books />} />
 </Routes>
 </div>
