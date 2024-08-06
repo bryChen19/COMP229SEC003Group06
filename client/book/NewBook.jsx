@@ -53,7 +53,7 @@ export default function NewBook() {
     author: "",
     description: "",
     image: "",
-    genre: "",
+    category: "",
     quantity: "",
     price: "",
     redirect: false,
@@ -70,7 +70,7 @@ export default function NewBook() {
     values.author && bookData.append("author", values.name);
     values.description && bookData.append("description", values.description);
     values.image && bookData.append("image", values.image);
-    values.genre && bookData.append("category", values.category);
+    values.category && bookData.append("category", values.category);
     values.quantity && bookData.append("quantity", values.quantity);
     values.price && bookData.append("price", values.price);
 
