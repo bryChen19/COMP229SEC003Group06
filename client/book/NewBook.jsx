@@ -92,7 +92,7 @@ export default function NewBook() {
   };
 
   if (values.redirect) {
-    return <Navigate to={"/seller/shop/edit/" + params.shopId} />;
+    return <Navigate to={"/librarian/shop/edit/" + params.shopId} />;
   }
   return (
     <div>
@@ -196,7 +196,7 @@ export default function NewBook() {
             Submit
           </Button>
           <Link
-            to={"/seller/shop/edit/" + params.shopId}
+            to={"/librarian/shop/edit/" + params.shopId}
             className={classes.submit}
           >
             <Button variant="contained">Cancel</Button>

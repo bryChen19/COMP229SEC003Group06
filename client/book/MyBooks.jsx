@@ -82,7 +82,7 @@ export default function MyBooks(props) {
       <Typography type="title" className={classes.title}>
         Books
         <span className={classes.addButton}>
-          <Link to={"/seller/" + props.shopId + "/books/new"}>
+          <Link to={"/librarian/" + props.shopId + "/books/new"}>
             <Button color="primary" variant="contained">
               <Icon className={classes.leftIcon}>add_box</Icon> New Book
             </Button>
@@ -124,7 +124,7 @@ export default function MyBooks(props) {
                 <ListItemSecondaryAction>
                   <Link
                     to={
-                      "/seller/" +
+                      "/librarian/" +
                       book.shop._id +
                       "/" +
                       book._id +

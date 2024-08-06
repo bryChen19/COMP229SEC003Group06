@@ -7,33 +7,34 @@ import Typography from '@material-ui/core/Typography';
 import logo from './../assets/images/logo.jpg';
 
 const useStyles = makeStyles(theme => ({
- card: {
- maxWidth: 600,
- margin: 'auto',
- marginTop: theme.spacing(5),
- },
- title: {
- padding: theme.spacing(3, 2.5, 2),
- color: theme.palette.openTitle,
- },
- media: {
- minHeight: 400,
- },
+    card: {
+        maxWidth: 600,
+        margin: 'auto',
+        marginTop: theme.spacing(5),
+    },
+    title: {
+        padding: theme.spacing(3, 2.5, 2),
+        color: theme.palette.openTitle,
+    },
+    media: {
+        minHeight: 400,
+    },
 }));
-export default function Home(){ 
-const classes = useStyles()
-return (
-<Card className={classes.card}>
 
- <Typography variant="h6" className={classes.title}>Home Page</Typography>
-<CardMedia className={classes.media}
-image={logo} title="Digital Development logo"/>
-<CardContent>
-<Typography variant="body2" component="p"> 
-Welcome to the Digital Development home page.
-</Typography> 
-</CardContent>
-</Card> 
-)
+export default function Home() {
+    const classes = useStyles()
+    return (
+        <Card className={classes.card}>
+
+            <Typography variant="h6" className={classes.title}>Home Page</Typography>
+            <CardMedia className={classes.media}
+                image={logo} title="Digital Development logo" />
+            <CardContent>
+                <Typography variant="body2" component="p">
+                    Welcome to the Digital Development home page.
+                </Typography>
+            </CardContent>
+        </Card>
+    )
 }
 
