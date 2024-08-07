@@ -39,8 +39,8 @@ import Typography from '@material-ui/core/Typography'
 import Avatar from '@material-ui/core/Avatar'
 import Grid from '@material-ui/core/Grid'
 import {read} from './api-shop.js'
-import Books from './../book/Books'
-import {listByShop} from './../book/api-book.js'
+import Products from './../product/Products'
+import {listByShop} from './../product/api-product.js'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
     height: 100,
     margin: 'auto'
   },
-  bookTitle: {
+  productTitle: {
     padding:`${theme.spacing(3)}px ${theme.spacing(2.5)}px ${theme.spacing(1)}px ${theme.spacing(2)}px`,
     color: theme.palette.openTitle,
     width: '100%',
@@ -76,7 +76,7 @@ const useStyles = makeStyles(theme => ({
 export default function Shop({match}) {
   const classes = useStyles()
   const [shop, setShop] = useState('')
-  const [books, setBooks] = useState([])
+  const [products, setProducts] = useState([])
   const [error, setError] = useState('')
 
   useEffect(() => {
@@ -89,7 +89,7 @@ export default function Shop({match}) {
       if (data.error) {
         setError(data.error)
       } else {
-        setBooks(data)
+        setProducts(data)
       }
     })
     read({
@@ -117,7 +117,7 @@ export default function Shop({match}) {
       if (data.error) {
         setError(data.error)
       } else {
-        setBooks(data)
+        setProducts(data)
       }
     })
 
@@ -148,8 +148,8 @@ export default function Shop({match}) {
         </Grid>
         <Grid item xs={8} sm={8}>
           <Card>
-            <Typography type="title" component="h2" className={classes.bookTitle}>Books</Typography>
-            <Books books={books} searched={false}/>
+            <Typography type="title" component="h2" className={classes.productTitle}>Products</Typography>
+            <Products products={products} searched={false}/>
           </Card>
         </Grid>
       </Grid>

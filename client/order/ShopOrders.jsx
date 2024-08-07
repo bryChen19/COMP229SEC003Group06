@@ -11,7 +11,7 @@ import Collapse from '@material-ui/core/Collapse'
 import Divider from '@material-ui/core/Divider'
 import auth from './../auth/auth-helper'
 import {listByShop} from './api-order.js'
-import BookOrderEdit from './BookOrderEdit'
+import ProductOrderEdit from './ProductOrderEdit'
 
 const useStyles = makeStyles(theme => ({
   root: theme.mixins.gutters({
@@ -84,7 +84,7 @@ export default function ShopOrders({match}) {
                 {open == index ? <ExpandLess /> : <ExpandMore />}
               </ListItem><Divider/>
               <Collapse component="li" in={open == index} timeout="auto" unmountOnExit>
-                <BookOrderEdit shopId={match.params.shopId} order={order} orderIndex={index} updateOrders={updateOrders}/>
+                <ProductOrderEdit shopId={match.params.shopId} order={order} orderIndex={index} updateOrders={updateOrders}/>
                 <div className={classes.customerDetails}>
                   <Typography type="subheading" component="h3" className={classes.subheading}>
                     Deliver to:

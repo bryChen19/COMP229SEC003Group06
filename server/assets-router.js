@@ -11,4 +11,3 @@ router.get(videoRegex, (req, res) => {
   res.redirect(303, `http://localhost:3000/src${filePath}`);
 });
 module.exports = router;
-

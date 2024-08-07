@@ -81,7 +81,7 @@ export default function NewShop() {
   }
 
     if (values.redirect) {
-      return (<Redirect to={'/librarian/shops'}/>)
+      return (<Redirect to={'/seller/shops'}/>)
     }
     return (<div>
       <Card className={classes.card}>
@@ -115,7 +115,7 @@ export default function NewShop() {
         </CardContent>
         <CardActions>
           <Button color="primary" variant="contained" onClick={clickSubmit} className={classes.submit}>Submit</Button>
-          <Link to='/librarian/shops' className={classes.submit}><Button variant="contained">Cancel</Button></Link>
+          <Link to='/seller/shops' className={classes.submit}><Button variant="contained">Cancel</Button></Link>
         </CardActions>
       </Card>
     </div>)

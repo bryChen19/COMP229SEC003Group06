@@ -68,7 +68,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
     color: theme.palette.openTitle
   },
-  bookTitle: {
+  productTitle: {
     fontSize: '1.15em',
     marginBottom: '5px'
   },
@@ -98,7 +98,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Order({match}) {
   const classes = useStyles()
-  const [order, setOrder] = useState({books:[], delivery_address:{}})
+  const [order, setOrder] = useState({products:[], delivery_address:{}})
 
   useEffect(() => {
     const abortController = new AbortController()
@@ -118,9 +118,9 @@ export default function Order({match}) {
   }, [])
 
   const getTotal = () => {
-    return order.books.reduce((a, b) => {
+    return order.products.reduce((a, b) => {
        const quantity = b.status == "Cancelled" ? 0 : b.quantity
-        return a + (quantity*b.book.price)
+        return a + (quantity*b.product.price)
     }, 0)
   }
 
@@ -135,19 +135,19 @@ export default function Order({match}) {
         <Grid container spacing={4}>
             <Grid item xs={7} sm={7}>
                 <Card className={classes.innerCardItems}>
-                  {order.books.map((item, i) => {
+                  {order.products.map((item, i) => {
                     return  <span key={i}>
                       <Card className={classes.cart} >
                         <CardMedia
                           className={classes.cover}
-                          image={'/api/book/image/'+item.book._id}
-                          title={item.book.name}
+                          image={'/api/product/image/'+item.product._id}
+                          title={item.product.name}
                         />
                         <div className={classes.details}>
                           <CardContent className={classes.content}>
-                            <Link to={'/book/'+item.book._id}><Typography type="title" component="h3" className={classes.bookTitle} color="primary">{item.book.name}</Typography></Link>
-                            <Typography type="subheading" component="h3" className={classes.itemShop} color="primary">$ {item.book.price} x {item.quantity}</Typography>
-                            <span className={classes.itemTotal}>${item.book.price * item.quantity}</span>
+                            <Link to={'/product/'+item.product._id}><Typography type="title" component="h3" className={classes.productTitle} color="primary">{item.product.name}</Typography></Link>
+                            <Typography type="subheading" component="h3" className={classes.itemShop} color="primary">$ {item.product.price} x {item.quantity}</Typography>
+                            <span className={classes.itemTotal}>${item.product.price * item.quantity}</span>
                             <span className={classes.itemShop}>Shop: {item.shop.name}</span>
                             <Typography type="subheading" component="h3" color={item.status == "Cancelled" ? "error":"secondary"}>Status: {item.status}</Typography>
                           </CardContent>
@@ -163,7 +163,7 @@ export default function Order({match}) {
             </Grid>
             <Grid item xs={5} sm={5}>
               <Card className={classes.innerCard}>
-                <Typography type="subheading" component="h2" className={classes.bookTitle} color="primary">
+                <Typography type="subheading" component="h2" className={classes.productTitle} color="primary">
                  Deliver to:
                 </Typography>
                 <Typography type="subheading" component="h3" className={classes.info} color="primary"><strong>{order.customer_name}</strong></Typography><br/>

@@ -31,7 +31,7 @@ const listByShop = async (params, credentials, signal) => {
   }
 }
 
-const update = async (params, credentials, book) => {
+const update = async (params, credentials, product) => {
   try {
     let response = await fetch('/api/order/status/' + params.shopId, {
       method: 'PUT',
@@ -40,7 +40,7 @@ const update = async (params, credentials, book) => {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + credentials.t
       },
-      body: JSON.stringify(book)
+      body: JSON.stringify(product)
     })
     return response.json()
   } catch(err){
@@ -48,16 +48,16 @@ const update = async (params, credentials, book) => {
   }
 }
 
-const cancelbook = async (params, credentials, book) => {
+const cancelProduct = async (params, credentials, product) => {
   try {
-    let response = await fetch('/api/order/'+params.shopId+'/cancel/'+params.bookId, {
+    let response = await fetch('/api/order/'+params.shopId+'/cancel/'+params.productId, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + credentials.t
       },
-      body: JSON.stringify(book)
+      body: JSON.stringify(product)
     })
     return response.json()
   }catch(err){
@@ -65,7 +65,7 @@ const cancelbook = async (params, credentials, book) => {
   }
 }
 
-const processCharge = async (params, credentials, book) => {
+const processCharge = async (params, credentials, product) => {
   try {
     let response = await fetch('/api/order/'+params.orderId+'/charge/'+params.userId+'/'+params.shopId, {
       method: 'PUT',
@@ -74,7 +74,7 @@ const processCharge = async (params, credentials, book) => {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + credentials.t
       },
-      body: JSON.stringify(book)
+      body: JSON.stringify(product)
     })
     return response.json()
   } catch(err) {
@@ -126,7 +126,7 @@ export {
   create,
   listByShop,
   update,
-  cancelbook,
+  cancelProduct,
   processCharge,
   getStatusValues,
   listByUser,

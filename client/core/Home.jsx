@@ -1,10 +1,12 @@
+
+
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import logo from './../assets/images/logo.jpg';
+import logoImg from './../assets/images/logo.jpg';
    
 
 const useStyles = makeStyles(theme => ({
@@ -29,10 +31,10 @@ return (
    
   <Typography variant="h6" className={classes.title}>Home Page</Typography>
 <CardMedia className={classes.media}
-image={logo} title="Digital Development Logo"/>
+image={logoImg} title="Digital Development logo"/>
 <CardContent>
 <Typography variant="body2" component="p"> 
-Welcome to the Digital Development Book Store.
+Welcome to the Digital Development store.
 </Typography> 
 </CardContent>
 </Card> 

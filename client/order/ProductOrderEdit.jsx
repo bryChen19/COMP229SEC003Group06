@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 import Divider from '@material-ui/core/Divider'
 import auth from './../auth/auth-helper'
-import {getStatusValues, update, cancelBook, processCharge} from './api-order.js'
+import {getStatusValues, update, cancelProduct, processCharge} from './api-order.js'
 
 const useStyles = makeStyles(theme => ({
   nested: {
@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     padding: '5px'
   }
 }))
-export default function BroductOrderEdit (props){
+export default function ProductOrderEdit (props){
   const classes = useStyles()
   const [values, setValues] = useState({
       open: 0,
@@ -63,21 +63,21 @@ export default function BroductOrderEdit (props){
     }
   }, [])
 
-  const handleStatusChange = bookIndex => event => {
+  const handleStatusChange = productIndex => event => {
     let order = props.order
-    order.books[bookIndex].status = event.target.value
-    let book = order.books[bookIndex]
+    order.products[productIndex].status = event.target.value
+    let product = order.products[productIndex]
 
     if (event.target.value == "Cancelled") {
-      cancelBook({
+      cancelProduct({
           shopId: props.shopId,
-          bookId: book.book._id
+          productId: product.product._id
         }, {
           t: jwt.token
         }, {
-          cartItemId: book._id,
+          cartItemId: product._id,
           status: event.target.value,
-          quantity: book.quantity
+          quantity: product.quantity
         })
         .then((data) => {
           if (data.error) {
@@ -101,9 +101,9 @@ export default function BroductOrderEdit (props){
         }, {
           t: jwt.token
         }, {
-          cartItemId: book._id,
+          cartItemId: product._id,
           status: event.target.value,
-          amount: (book.quantity * book.book.price)
+          amount: (product.quantity * product.product.price)
         })
         .then((data) => {
           if (data.error) {
@@ -125,7 +125,7 @@ export default function BroductOrderEdit (props){
         }, {
           t: jwt.token
         }, {
-          cartItemId: book._id,
+          cartItemId: product._id,
           status: event.target.value
         })
         .then((data) => {
@@ -150,15 +150,15 @@ export default function BroductOrderEdit (props){
         {values.error}
       </Typography>
       <List disablePadding style={{backgroundColor:'#f8f8f8'}}>
-        {props.order.books.map((item, index) => {
+        {props.order.products.map((item, index) => {
           return <span key={index}>
                   { item.shop == props.shopId &&
                     <ListItem button className={classes.nested}>
                       <ListItemText
                         primary={<div>
-                                    <img className={classes.listImg} src={'/api/book/image/'+item.book._id}/>
+                                    <img className={classes.listImg} src={'/api/product/image/'+item.product._id}/>
                                     <div className={classes.listDetails}>
-                                      {item.book.name}
+                                      {item.product.name}
                                       <p className={classes.listQty}>{"Quantity: "+item.quantity}</p>
                                     </div>
                                   </div>}/>
@@ -190,7 +190,7 @@ export default function BroductOrderEdit (props){
       </List>
     </div>)
 }
-BookOrderEdit.propTypes = {
+ProductOrderEdit.propTypes = {
   shopId: PropTypes.string.isRequired,
   order: PropTypes.object.isRequired,
   orderIndex: PropTypes.number.isRequired,

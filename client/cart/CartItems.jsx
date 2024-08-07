@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: 0,
     width: 50
   },
-  bookTitle: {
+  productTitle: {
     fontSize: '1.15em',
     marginBottom: '5px'
   },
@@ -108,7 +108,7 @@ export default function CartItems (props) {
 
   const getTotal = () => {
     return cartItems.reduce((a, b) => {
-        return a + (b.quantity*b.book.price)
+        return a + (b.quantity*b.product.price)
     }, 0)
   }
 
@@ -133,16 +133,16 @@ export default function CartItems (props) {
             return <span key={i}><Card className={classes.cart}>
               <CardMedia
                 className={classes.cover}
-                image={'/api/book/image/'+item.book._id}
-                title={item.book.name}
+                image={'/api/product/image/'+item.product._id}
+                title={item.product.name}
               />
               <div className={classes.details}>
                 <CardContent className={classes.content}>
-                  <Link to={'/book/'+item.book._id}><Typography type="title" component="h3" className={classes.bookTitle} color="primary">{item.book.name}</Typography></Link>
+                  <Link to={'/product/'+item.product._id}><Typography type="title" component="h3" className={classes.productTitle} color="primary">{item.product.name}</Typography></Link>
                   <div>
-                    <Typography type="subheading" component="h3" className={classes.price} color="primary">$ {item.book.price}</Typography>
-                    <span className={classes.itemTotal}>${item.book.price * item.quantity}</span>
-                    <span className={classes.itemShop}>Shop: {item.book.shop.name}</span>
+                    <Typography type="subheading" component="h3" className={classes.price} color="primary">$ {item.product.price}</Typography>
+                    <span className={classes.itemTotal}>${item.product.price * item.quantity}</span>
+                    <span className={classes.itemShop}>Shop: {item.product.shop.name}</span>
                   </div>
                 </CardContent>
                 <div className={classes.subheading}>

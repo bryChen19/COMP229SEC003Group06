@@ -49,7 +49,7 @@ export default function EditProfile({ match }) {
       name: '',
       email: '',
       password: '',
-      librarian: false,
+      seller: false,
       redirectToProfile: false,
       error: ''
   })
@@ -64,7 +64,7 @@ export default function EditProfile({ match }) {
       if (data && data.error) {
         setValues({...values, error: data.error})
       } else {
-        setValues({...values, name: data.name, email: data.email, librarian: data.librarian})
+        setValues({...values, name: data.name, email: data.email, seller: data.seller})
       }
     })
     return function cleanup(){
@@ -78,7 +78,7 @@ export default function EditProfile({ match }) {
       name: values.name || undefined,
       email: values.email || undefined,
       password: values.password || undefined,
-      librarian: values.librarian || undefined
+      seller: values.seller || undefined
     }
     update({
       userId: match.params.userId
@@ -98,7 +98,7 @@ export default function EditProfile({ match }) {
     setValues({...values, [name]: event.target.value})
   }
   const handleCheck = (event, checked) => {
-    setValues({...values, 'librarian': checked})
+    setValues({...values, 'seller': checked})
   }
 
   if (values.redirectToProfile) {
@@ -114,7 +114,7 @@ export default function EditProfile({ match }) {
           <TextField id="email" type="email" label="Email" className={classes.textField} value={values.email} onChange={handleChange('email')} margin="normal"/><br/>
           <TextField id="password" type="password" label="Password" className={classes.textField} value={values.password} onChange={handleChange('password')} margin="normal"/>
           <Typography variant="subtitle1" className={classes.subheading}>
-            Librarian Account
+            Seller Account
           </Typography>
           <FormControlLabel
             control={
@@ -122,10 +122,10 @@ export default function EditProfile({ match }) {
                                 checked: classes.checked,
                                 bar: classes.bar,
                               }}
-                      checked={values.librarian}
+                      checked={values.seller}
                       onChange={handleCheck}
               />}
-            label={values.librarian? 'Active' : 'Inactive'}
+            label={values.seller? 'Active' : 'Inactive'}
           />
           <br/> {
             values.error && (<Typography component="p" color="error">

@@ -77,7 +77,7 @@ export default function MyShops(){
         <Typography type="title" className={classes.title}>
           Your Shops
           <span className={classes.addButton}>
-            <Link to="/librarian/shop/new">
+            <Link to="/seller/shop/new">
               <Button color="primary" variant="contained">
                 <Icon className={classes.leftIcon}>add_box</Icon>  New Shop
               </Button>
@@ -94,12 +94,12 @@ export default function MyShops(){
                 <ListItemText primary={shop.name} secondary={shop.description}/>
                 { auth.isAuthenticated().user && auth.isAuthenticated().user._id == shop.owner._id &&
                   (<ListItemSecondaryAction>
-                    <Link to={"/librarian/orders/" + shop.name+ '/'+shop._id}>
+                    <Link to={"/seller/orders/" + shop.name+ '/'+shop._id}>
                       <Button aria-label="Orders" color="primary">
                         View Orders
                       </Button>
                     </Link>
-                    <Link to={"/librarian/shop/edit/" + shop._id}>
+                    <Link to={"/seller/shop/edit/" + shop._id}>
                       <IconButton aria-label="Edit" color="primary">
                         <Edit/>
                       </IconButton>

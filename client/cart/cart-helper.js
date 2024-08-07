@@ -14,7 +14,7 @@ const cart = {
         cart = JSON.parse(localStorage.getItem('cart'))
       }
       cart.push({
-        book: item,
+        product: item,
         quantity: 1,
         shop: item.shop._id
       })

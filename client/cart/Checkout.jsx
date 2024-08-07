@@ -47,7 +47,7 @@ export default function Checkout (){
   const user = auth.isAuthenticated().user
   const [values, setValues] = useState({
     checkoutDetails: {
-      books: cart.getCart(),
+      products: cart.getCart(),
       customer_name: user.name,
       customer_email:user.email,
       delivery_address: { street: '', city: '', state: '', zipcode: '', country:''}

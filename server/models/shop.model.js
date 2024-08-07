@@ -1,9 +1,10 @@
 import mongoose from 'mongoose'
 import crypto from 'crypto'
+//const mongoose = require('mongoose');
 const ShopSchema = new mongoose.Schema({
-    name:{
-        type:String,
-        trim:true,
+    name: {
+        type: String,
+        trim: true,
         required: 'Name is required'
     },
     description: {
@@ -11,11 +12,11 @@ const ShopSchema = new mongoose.Schema({
         trim: true
     },
     image: {
-        data:Buffer,
+        data: Buffer,
         contentType: String
     },
     owner: {
-        type:mongoose.Schema.ObjectId,
+        type: mongoose.Schema.ObjectId,
         ref: 'User'
     },
     updated: Date,

@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import {read, update} from './api-shop.js'
 import {Redirect} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
-import MyBooks from './../book/Mybooks'
+import MyProducts from './../product/MyProducts'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -114,7 +114,7 @@ export default function EditShop ({match}) {
           ? `/api/shops/logo/${values.id}?${new Date().getTime()}`
           : '/api/shops/defaultphoto'
     if (values.redirect) {
-      return (<Redirect to={'/librarian/shops'}/>)
+      return (<Redirect to={'/seller/shops'}/>)
     }
     return (<div className={classes.root}>
       <Grid container spacing={8}>
@@ -160,7 +160,7 @@ export default function EditShop ({match}) {
           </Card>
           </Grid>
           <Grid item xs={6} sm={6}>
-            <MyBooks shopId={match.params.shopId}/>
+            <MyProducts shopId={match.params.shopId}/>
           </Grid>
         </Grid>
     </div>)
