@@ -121,7 +121,7 @@ export default function EditProduct ({match}) {
       <Card className={classes.card}>
         <CardContent>
           <Typography type="headline" component="h2" className={classes.title}>
-            Edit Product
+            Edit Book
           </Typography><br/>
           <Avatar src={imageUrl} className={classes.bigAvatar}/><br/>
           <input accept="image/*" onChange={handleChange('image')} className={classes.input} id="icon-button-file" type="file" />

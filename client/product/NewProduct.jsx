@@ -93,7 +93,7 @@ export default function NewProduct({match}) {
       <Card className={classes.card}>
         <CardContent>
           <Typography type="headline" component="h2" className={classes.title}>
-            New Product
+            New Book
           </Typography><br/>
           <input accept="image/*" onChange={handleChange('image')} className={classes.input} id="icon-button-file" type="file"/>
           <label htmlFor="icon-button-file">

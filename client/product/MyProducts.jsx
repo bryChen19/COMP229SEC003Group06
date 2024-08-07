@@ -77,11 +77,11 @@ export default function MyProducts (props){
     return (
       <Card className={classes.products}>
         <Typography type="title" className={classes.title}>
-          Products
+          Books
           <span className={classes.addButton}>
             <Link to={"/seller/"+props.shopId+"/products/new"}>
               <Button color="primary" variant="contained">
-                <Icon className={classes.leftIcon}>add_box</Icon>  New Product
+                <Icon className={classes.leftIcon}>add_box</Icon>  New Book
               </Button>
             </Link>
           </span>
