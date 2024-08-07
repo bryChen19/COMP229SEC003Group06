@@ -21,7 +21,7 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 //import ArrowForward from '@material-ui/core/ArrowForward'
 import ArrowForward from '@material-ui/icons/ArrowForward';
-import unicornbikeImg from './../assets/images/unicornbikeImg.jpg'
+import logoImg from './../assets/images/logo.jpg'
 export default function Users() {
 useEffect(() => {
     const abortController = new AbortController()
