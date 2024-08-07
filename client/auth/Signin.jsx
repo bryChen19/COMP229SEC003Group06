@@ -7,9 +7,8 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import Icon from '@material-ui/core/Icon'
 import { makeStyles } from '@material-ui/core/styles'
-import auth from './auth-helper.js'
-import {Navigate} from 'react-router-dom'
-import { useLocation } from 'react-router-dom';
+import auth from './../auth/auth-helper'
+import {Redirect} from 'react-router-dom'
 import {signin} from './api-auth.js'
 
 const useStyles = makeStyles(theme => ({
@@ -39,14 +38,12 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function Signin(props) {
-  const location = useLocation();
-  console.log(location.state)
   const classes = useStyles()
   const [values, setValues] = useState({
-      email: '',
-      password: '',
-      error: '',
-      redirectToReferrer: false
+    email: '',
+    password: '',
+    error: '',
+    redirectToReferrer: false
   })
 
   const clickSubmit = () => {
@@ -54,12 +51,11 @@ export default function Signin(props) {
       email: values.email || undefined,
       password: values.password || undefined
     }
-console.log(user)
+
     signin(user).then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error})
       } else {
-        console.log(data)
         auth.authenticate(data, () => {
           setValues({ ...values, error: '',redirectToReferrer: true})
         })
@@ -71,21 +67,20 @@ console.log(user)
     setValues({ ...values, [name]: event.target.value })
   }
 
-  const {from} = location.state || {
-      from: {
-        pathname: '/'
-      }
+  const {from} = props.location.state || {
+    from: {
+      pathname: '/'
+    }
   }
   const {redirectToReferrer} = values
   if (redirectToReferrer) {
-    return <Navigate to={from}/>;
-      
+      return (<Redirect to={from}/>)
   }
 
   return (
       <Card className={classes.card}>
         <CardContent>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h5" className={classes.title}>
             Sign In
           </Typography>
           <TextField id="email" type="email" label="Email" className={classes.textField} value={values.email} onChange={handleChange('email')} margin="normal"/><br/>
@@ -98,7 +93,7 @@ console.log(user)
           }
         </CardContent>
         <CardActions>
-          <Button color="primary" variant="contained" onClick={clickSubmit} className={classes.submit}>Submit</Button>
+        <Button color="primary" variant="contained" onClick={clickSubmit} className={classes.submit}>Submit</Button>
         </CardActions>
       </Card>
     )

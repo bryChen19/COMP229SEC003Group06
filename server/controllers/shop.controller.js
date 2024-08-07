@@ -3,7 +3,8 @@ import extend from "lodash/extend.js";
 import errorHandler from "./../helpers/dbErrorHandler.js";
 import formidable from "formidable";
 import fs from "fs";
-const create = (req, res) => {
+
+export const create = (req, res) => {
   let form = formidable({ keepExtensions: true });
   form.parse(req, async (err, fields, files) => {
     if (err) {

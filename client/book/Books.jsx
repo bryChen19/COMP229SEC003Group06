@@ -1,92 +1,78 @@
 import React from 'react'
-import {useState} from 'react'
-import {useEffect} from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Card from '@material-ui/core/Card'
-import Paper from '@material-ui/core/Paper'
-import List from '@material-ui/core/List'
-import {list} from './api-book.js'
-import { Link as RouterLink } from 'react-router-dom';
-import Link from '@material-ui/core/Link'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
-import ListItemText from '@material-ui/core/ListItemText'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import IconButton from '@material-ui/core/IconButton'
-import Avatar from '@material-ui/core/Avatar'
-//import Person from '@material-ui/core/Person'
-//import ArrowForward from '@material-ui/core/ArrowForward'
-import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
+import PropTypes from 'prop-types'
+import {makeStyles} from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-//import ArrowForward from '@material-ui/core/ArrowForward'
-import ArrowForward from '@material-ui/icons/ArrowForward';
-import unicornbikeImg from './../assets/images/unicornbikeImg.jpg'
-const useStyles = makeStyles(theme => ({
- card: {
- // Define your card styles here
- },
- textField: {
- // Define your text field styles here
- },
- error: {
- // Define your error icon styles here
- },
- submit: {
- // Define your submit button styles here
- },
- title: {
- // Define your title styles here
- },
- root: {
- // Define your root styles here
- },
- }));
-export default function Books() {
-const [books, setBooks] = useState([])
-useEffect(() => {
-const abortController = new AbortController()
-const signal = abortController.signal
-list(signal).then((data) => {
-console.log(data)
-if (data && data.error) { 
-console.log(data.error)
-} else { 
-console.log(data)
-setBooks(data)
-} 
-})
-return function cleanup(){ 
-abortController.abort()
-} 
-}, [])
- 
-const classes = useStyles()
-return (
-<Paper className={classes.root} elevation={4}>
-<Typography variant="h6" className={classes.title}> 
-All Books
-</Typography> 
-<List dense>
-{books.map((item, i) => { 
- return <Link component={RouterLink} to={"/book/" + item._id} key={i}>
- 
-<ListItem button> 
-<ListItemAvatar>
-<Avatar> 
-</Avatar>
-</ListItemAvatar>
-<ListItemText primary={item.name}/> 
-<ListItemSecondaryAction>
-<IconButton>
-<ArrowForward/> 
-</IconButton>
-</ListItemSecondaryAction> 
-</ListItem>
-</Link> 
-})} 
-</List>
-</Paper>
-)
-}
+import GridList from '@material-ui/core/GridList'
+import GridListTile from '@material-ui/core/GridListTile'
+import GridListTileBar from '@material-ui/core/GridListTileBar'
+import {Link} from 'react-router-dom'
+import AddToCart from '../cart/AddToCart'
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    background: theme.palette.background.paper,
+    textAlign: 'left',
+    padding: '0 8px'
+  },
+  container: {
+    minWidth: '100%',
+    paddingBottom: '14px'
+  },
+  gridList: {
+    width: '100%',
+    minHeight: 200,
+    padding: '16px 0 10px'
+  },
+  title: {
+    padding:`${theme.spacing(3)}px ${theme.spacing(2.5)}px ${theme.spacing(2)}px`,
+    color: theme.palette.openTitle,
+    width: '100%'
+  },
+  tile: {
+    textAlign: 'center'
+  },
+  image: {
+    height: '100%'
+  },
+  tileBar: {
+    backgroundColor: 'rgba(0, 0, 0, 0.72)',
+    textAlign: 'left'
+  },
+  tileTitle: {
+    fontSize:'1.1em',
+    marginBottom:'5px',
+    color:'rgb(189, 222, 219)',
+    display:'block'
+  }
+}))
+
+export default function books(props){
+  const classes = useStyles()
+    return (
+      <div className={classes.root}>
+      {props.books.length > 0 ?
+        (<div className={classes.container}>
+          <GridList cellHeight={200} className={classes.gridList} cols={3}>
+          {props.books.map((book, i) => (
+            <GridListTile key={i} className={classes.tile}>
+              <Link to={"/book/"+book._id}><img className={classes.image} src={'/api/book/image/'+book._id} alt={book.name} /></Link>
+              <GridListTileBar className={classes.tileBar}
+                title={<Link to={"/book/"+book._id} className={classes.tileTitle}>{book.name}</Link>}
+                subtitle={<span>$ {book.price}</span>}
+                actionIcon={
+                  <AddToCart item={book}/>
+                }
+              />
+            </GridListTile>
+          ))}
+        </GridList></div>) : props.searched && (<Typography variant="subheading" component="h4" className={classes.title}>No books found! :(</Typography>)}
+      </div>)
+}
+books.propTypes = {
+  books: PropTypes.array.isRequired,
+  searched: PropTypes.bool.isRequired
+}
