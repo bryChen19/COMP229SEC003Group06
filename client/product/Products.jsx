@@ -69,7 +69,7 @@ export default function Products(props){
               />
             </GridListTile>
           ))}
-        </GridList></div>) : props.searched && (<Typography variant="subheading" component="h4" className={classes.title}>No products found! :(</Typography>)}
+        </GridList></div>) : props.searched && (<Typography variant="subheading" component="h4" className={classes.title}>No Books found! :(</Typography>)}
       </div>)
 }
 Products.propTypes = {

@@ -148,7 +148,7 @@ export default function Shop({match}) {
         </Grid>
         <Grid item xs={8} sm={8}>
           <Card>
-            <Typography type="title" component="h2" className={classes.productTitle}>Products</Typography>
+            <Typography type="title" component="h2" className={classes.productTitle}>Books</Typography>
             <Products products={products} searched={false}/>
           </Card>
         </Grid>

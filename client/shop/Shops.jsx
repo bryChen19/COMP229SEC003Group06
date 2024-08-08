@@ -63,7 +63,7 @@ export default function Shops(){
     <div>
       <Paper className={classes.root} elevation={4}>
         <Typography type="title" className={classes.title}>
-          All Shops
+          All Libraries:
         </Typography>
         <List dense>
           {shops.map((shop, i) => {

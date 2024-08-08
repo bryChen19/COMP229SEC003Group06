@@ -178,7 +178,7 @@ export default function CartItems (props) {
           </Link>
         </div>
       </span>) :
-      <Typography variant="subtitle1" component="h3" color="primary">No items added to your cart.</Typography>
+      <Typography variant="subtitle1" component="h3" color="primary">No Books added to your cart.</Typography>
     }
     </Card>)
 }
