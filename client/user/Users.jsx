@@ -16,6 +16,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Avatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography'
 import ArrowForward from '@material-ui/icons/ArrowForward';
+
 const useStyles = makeStyles(theme => ({
     card: {
         // Define your card styles here
@@ -64,32 +65,6 @@ export default function Users() {
             <List dense>
                 {users.map((item, i) => {
                     return <Link component={RouterLink} to={"/user/" + item._id} key={i}>
-                        <ListItem button>
-                            <ListItemAvatar>
-                                <Avatar>
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary={item.name} />
-                            <ListItemSecondaryAction>
-                                <IconButton>
-                                    <ArrowForward />
-                                </IconButton>
-                            </ListItemSecondaryAction>
-                        </ListItem>
-                    </Link>
-                })}
-            </List>
-        </Paper>
-    )
-    return (
-        <Paper className={classes.root} elevation={4}>
-            <Typography variant="h6" className={classes.title}>
-                All Users
-            </Typography>
-            <List dense>
-                {users.map((item, i) => {
-                    return <Link component={RouterLink} to={"/user/" + item._id} key={i}>
-
                         <ListItem button>
                             <ListItemAvatar>
                                 <Avatar>
