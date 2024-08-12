@@ -31,7 +31,7 @@ return res.status('401').json({ error: "Could not sign in" })
 
 const signout = (req, res) => { 
 res.clearCookie("t")
-return res.status('200').json({ 
+return res.status(200).json({ 
 message: "signed out"
 }) 
 }

@@ -59,7 +59,7 @@ export default function NewShop() {
   const handleChange = name => event => {
     const value = name === 'image'
       ? event.target.files[0]
-      : event.target.value
+      : event.target.value;
     setValues({...values, [name]: value })
   }
   const clickSubmit = () => {

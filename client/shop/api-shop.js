@@ -1,4 +1,5 @@
 const create = async (params, credentials, shop) => {
+  
     try {
       let response = await fetch('/api/shops/by/'+ params.userId, {
         method: 'POST',
@@ -12,7 +13,7 @@ const create = async (params, credentials, shop) => {
       } catch(err) { 
         console.log(err)
       }
-  }
+  } 
   
   const list = async (signal) => {
     try {
