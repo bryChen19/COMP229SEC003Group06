@@ -35,19 +35,11 @@ const Menu = withRouter(({history}) => (
             <HomeIcon/>
           </IconButton>
         </Link>
-<<<<<<< HEAD
-
 
         <Link to="/users">
         <Button style={isActive(history, "/users")}>Readers</Button>
         </Link>
 
-
-=======
-        <Link to="/users">
-          <Button style={isActive(history, "/users")}>Users</Button>
-        </Link>
->>>>>>> parent of b9500acb (Revert "users should be fixed")
         <Link to="/shops/all">
           <Button style={isActive(history, "/shops/all")}>All Libraries</Button>
         </Link>
