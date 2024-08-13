@@ -5,69 +5,32 @@ import formidable from 'formidable'
 import fs from 'fs'
 //import defaultImage from './../../client/assets/images/default.png'
 
-/*const create = (req, res) => {
-  const form = formidable({ keepExtensions: true });
+const create = (req, res) => {
   console.log("no create");
+  let form = new formidable.IncomingForm()
+  form.keepExtensions = true
   form.parse(req, async (err, fields, files) => {
     if (err) {
-      return res.status(400).json({
+      res.status(400).json({
         message: "Image could not be uploaded"
-      });
+      })
     }
-    let shop = new Shop(fields);
-    shop.owner = req.profile;
-    if (files.image) {
-      shop.image.data = fs.readFileSync(files.image.path);
-      shop.image.contentType = files.image.mimetype;
+    let shop = new Shop(fields)
+    shop.owner= req.profile
+    if(files.image){
+      shop.image.data = fs.readFileSync(files.image.path)
+      shop.image.contentType = files.image.type
     }
     try {
-      let result = await shop.save();
-      res.status(200).json(result);
-    } catch (err) {
+      let result = await shop.save()
+      res.status(200).json(result)
+    }catch (err){
       return res.status(400).json({
         error: errorHandler.getErrorMessage(err)
-      });
+      })
     }
-  });
-};*/
-
-const create = (req, res) => {
-  console.log("Creating shop...");
-  // Create the form object with the correct syntax for formidable
-  const form = formidable({ keepExtensions: true });
-
-  form.parse(req, async (err, fields, files) => {
-    if (err) {
-      return res.status(400).json({
-        message: "Image could not be uploaded",
-      });
-    }
-
-    // Ensure that the description is always treated as a string
-    if (fields.description) {
-      fields.description = Array.isArray(fields.description)
-        ? fields.description.join(', ')
-        : fields.description.toString();
-    }
-
-    let shop = new Shop(fields);
-    shop.owner = req.profile;
-
-    if (files.image) {
-      shop.image.data = fs.readFileSync(files.image.filepath); // use 'filepath' instead of 'path'
-      shop.image.contentType = files.image.mimetype; // use 'mimetype' instead of 'type'
-    }
-
-    try {
-      let result = await shop.save();
-      res.status(200).json(result);
-    } catch (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err),
-      });
-    }
-  });
-};
+  })
+}
 
 const shopByID = async (req, res, next, id) => {
   try {
@@ -103,34 +66,31 @@ const read = (req, res) => {
 }
 
 const update = (req, res) => {
-  const form = formidable({ keepExtensions: true });
-
+  let form = new formidable.IncomingForm()
+  form.keepExtensions = true
   form.parse(req, async (err, fields, files) => {
     if (err) {
-      return res.status(400).json({
-        message: "Photo could not be uploaded",
-      });
+      res.status(400).json({
+        message: "Photo could not be uploaded"
+      })
     }
-
-    let shop = req.shop;
-    shop = extend(shop, fields);
-    shop.updated = Date.now();
-
-    if (files.image) {
-      shop.image.data = fs.readFileSync(files.image.filepath); // use 'filepath' instead of 'path'
-      shop.image.contentType = files.image.mimetype; // use 'mimetype' instead of 'type'
+    let shop = req.shop
+    shop = extend(shop, fields)
+    shop.updated = Date.now()
+    if(files.image){
+      shop.image.data = fs.readFileSync(files.image.path)
+      shop.image.contentType = files.image.type
     }
-
     try {
-      let result = await shop.save();
-      res.json(result);
-    } catch (err) {
+      let result = await shop.save()
+      res.json(result)
+    }catch (err){
       return res.status(400).json({
-        error: errorHandler.getErrorMessage(err),
-      });
+        error: errorHandler.getErrorMessage(err)
+      })
     }
-  });
-};
+  })
+}
 
 const remove = async (req, res) => {
   try {

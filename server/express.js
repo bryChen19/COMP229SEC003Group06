@@ -4,7 +4,6 @@ import cookieParser from 'cookie-parser'
 import compress from 'compression'
 import cors from 'cors'
 import helmet from 'helmet'
-import formidable from 'formidable';
 import userRoutes from './routes/user.routes.js'
 import authRoutes from './routes/auth.routes.js'
 import shopRoutes from './routes/shop.routes.js'

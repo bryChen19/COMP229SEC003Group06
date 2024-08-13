@@ -75,11 +75,11 @@ export default function MyShops(){
     <div>
       <Paper className={classes.root} elevation={4}>
         <Typography type="title" className={classes.title}>
-          Your Libraries
+          Your Shops
           <span className={classes.addButton}>
             <Link to="/seller/shop/new">
               <Button color="primary" variant="contained">
-                <Icon className={classes.leftIcon}>add_box</Icon>  New Library
+                <Icon className={classes.leftIcon}>add_box</Icon>  New Shop
               </Button>
             </Link>
           </span>

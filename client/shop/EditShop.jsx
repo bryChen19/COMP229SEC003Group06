@@ -122,7 +122,7 @@ export default function EditShop ({match}) {
           <Card className={classes.card}>
             <CardContent>
               <Typography type="headline" component="h2" className={classes.title}>
-                Edit Book Store
+                Edit Shop
               </Typography>
               <br/>
               <Avatar src={logoUrl} className={classes.bigAvatar}/><br/>
